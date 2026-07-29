@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class Tipografia{
+class Tipografia {
   static TextStyle h1 = TextStyle(
-      fontSize: 32,
-      fontWeight: FontWeight.bold,
-      fontFamily: "inter",
+    fontSize: 32,
+    fontWeight: FontWeight.bold,
+    fontFamily: "inter",
     height: 1.3,
-    letterSpacing: 32 * -0.02 ,
-      );
+    letterSpacing: 32 * -0.02,
+  );
   static TextStyle subtitulo = TextStyle(
     fontSize: 12,
     fontWeight: FontWeight.w500,
@@ -16,11 +16,18 @@ class Tipografia{
     letterSpacing: 12 * -0.01,
   );
   static TextStyle link = TextStyle(
-    fontSize: 12,
+    fontSize: 15,
+    fontWeight: FontWeight.w600,
+    fontFamily: "inter",
+    height: 1.5,
+    letterSpacing: 12 * -0.01,
+    color: Colors.blue,
+  );
+  static TextStyle b = TextStyle(
+    fontSize: 15,
     fontWeight: FontWeight.w600,
     fontFamily: "inter",
     height: 1.4,
     letterSpacing: 12 * -0.01,
-    color: Colors.blue,
   );
 }
