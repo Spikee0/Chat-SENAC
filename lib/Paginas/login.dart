@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:primeiro_app/Paginas/cadastro.dart';
 import 'package:primeiro_app/Utilitarios/tipografia.dart';
-
 import '../main.dart';
 
 void main() {
@@ -34,25 +34,31 @@ class Login extends StatelessWidget {
         TextField(
           decoration: InputDecoration(
             hint: Text("Usuario@gmail.com"),
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10)
-              ),
-            ),
+            border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
           ),
+        ),
         SizedBox(height: 18),
         Text("Senha", style: Tipografia.subtitulo),
         TextField(
           decoration: InputDecoration(
             hint: Text("*******"),
             border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10),
-            borderSide: BorderSide(style: Tipografia.link)),
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(color: Colors.grey),
+            ),
             suffixIcon: Icon(Icons.visibility_off),
           ),
           obscureText: true,
         ),
         SizedBox(height: 18),
-        InkWell(onTap:() {}, child: Text("Esqueceu a senha?", textAlign: TextAlign.right, style: Tipografia.link)),
+        InkWell(
+          onTap: () {},
+          child: Text(
+            "Esqueceu a senha?",
+            textAlign: TextAlign.right,
+            style: Tipografia.link,
+          ),
+        ),
         SizedBox(height: 18),
         ElevatedButton(
           onPressed: () {},
@@ -84,11 +90,8 @@ class Login extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             spacing: 10,
             children: [
-              Image.asset("assets/imagens/google-icon.png", height: 18,),
-              Text(
-                "Continuar com o Google?",
-                style: Tipografia.b,
-              ),
+              Image.asset("assets/imagens/google-icon.png", height: 18),
+              Text("Continuar com o Google?", style: Tipografia.b),
             ],
           ),
         ),
@@ -108,11 +111,8 @@ class Login extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             spacing: 10,
             children: [
-              Image.asset("assets/imagens/facebook-icon.png", height: 18,),
-              Text(
-                "Continuar com o Facebook?",
-                style: Tipografia.b,
-              ),
+              Image.asset("assets/imagens/facebook-icon.png", height: 18),
+              Text("Continuar com o Facebook?", style: Tipografia.b),
             ],
           ),
         ),
@@ -122,8 +122,13 @@ class Login extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text("não tem uma conta?"),
-            InkWell(onTap:() {}, child: Text("  Cadastre-se", style: Tipografia.link),
-            )],
+            InkWell(
+              onTap: () {
+                Cadastro();
+              },
+              child: Text("  Cadastre-se", style: Tipografia.link),
+            ),
+          ],
         ),
       ],
     );
