@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:primeiro_app/Paginas/cadastro.dart';
+import 'package:primeiro_app/Paginas/dashboard.dart';
 import 'package:primeiro_app/Utilitarios/tipografia.dart';
 import 'Paginas/login.dart';
 
@@ -20,5 +21,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-
