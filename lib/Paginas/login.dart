@@ -25,7 +25,7 @@ class _LoginState extends State<Login> {
       ).showSnackBar(SnackBar(content: Text("Email e/ou senha invalidos")));
       return;
     } else {
-      (Navigator.push(
+      (Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => dashboard()),
       ));
@@ -83,7 +83,7 @@ class _LoginState extends State<Login> {
                       borderRadius: BorderRadius.circular(10),
                       borderSide: BorderSide(color: Colors.grey),
                     ),
-                    suffixIcon: Icon(Icons.visibility_off),
+                     suffixIcon: Icon(Icons.visibility_off,),
                   ),
                   obscureText: true,
                 ),
