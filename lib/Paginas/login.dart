@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:primeiro_app/Paginas/EsqueceuSenha.dart';
 import 'package:primeiro_app/Paginas/cadastro.dart';
 import 'package:primeiro_app/Paginas/dashboard.dart';
 import 'package:primeiro_app/Utilitarios/tipografia.dart';
 import '../main.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 void main() {
   runApp(MyApp());
 }
+
+bool _mostrarSenha = false;
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -19,20 +24,27 @@ class _LoginState extends State<Login> {
   final emailController = TextEditingController();
   final senhaController = TextEditingController();
 
-  void fazerLogin() {
-    if (emailController.text != "Teste@gmail.com" ||
-        senhaController.text != "123456") {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(SnackBar(content: Text("Email e/ou senha invalidos")));
+  Future<void> fazerLogin() async {
+    var url = Uri.http("10.112.4.33", "login");
+    var resposta = await http.post(
+      url,
+      headers: {
+        "content-type": "application/json"
+      },
+      body: jsonEncode({'email': emailController.text, 'senha': senhaController.text}),
+    );
+
+    if (resposta.statusCode != 200) {
+      var dados = jsonDecode(resposta.body);
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("${dados["message"]}")),
+      );
       return;
-    } else {
-      (Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => dashboard()),
-      ));
     }
-  }
+      Navigator.push(
+          context, MaterialPageRoute(builder: (build) => dashboard()));
+    }
 
   @override
   Widget build(BuildContext context) {
@@ -79,19 +91,33 @@ class _LoginState extends State<Login> {
                 Text("Senha", style: Tipografia.subtitulo),
                 TextField(
                   controller: senhaController,
+                  obscureText: !_mostrarSenha,
                   decoration: InputDecoration(
-                    hint: Text("*******"),
+                    hintText: "*******",
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
                       borderSide: BorderSide(color: Colors.grey),
                     ),
-                     suffixIcon: Icon(Icons.visibility_off,),
+                    suffixIcon: IconButton(
+                      icon: Icon(
+                        _mostrarSenha ? Icons.visibility : Icons.visibility_off,
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          _mostrarSenha = !_mostrarSenha;
+                        });
+                      },
+                    ),
                   ),
-                  obscureText: true,
                 ),
                 SizedBox(height: 18),
                 InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Esqueceusenha()),
+                    );
+                  },
                   child: Text(
                     "Esqueceu a senha?",
                     textAlign: TextAlign.right,
@@ -100,7 +126,7 @@ class _LoginState extends State<Login> {
                 ),
                 SizedBox(height: 18),
                 ElevatedButton(
-                  onPressed:fazerLogin,
+                  onPressed: fazerLogin,
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Color.fromRGBO(50, 110, 250, 10),
                     foregroundColor: Colors.white,

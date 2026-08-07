@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:primeiro_app/Paginas/login.dart';
 import 'package:primeiro_app/Utilitarios/tipografia.dart';
 import '../main.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 void main() {
   runApp(MyApp());
