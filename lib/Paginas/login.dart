@@ -7,12 +7,6 @@ import '../main.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-void main() {
-  runApp(MyApp());
-}
-
-bool _mostrarSenha = false;
-
 class Login extends StatefulWidget {
   const Login({super.key});
 
@@ -23,9 +17,10 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   final emailController = TextEditingController();
   final senhaController = TextEditingController();
+  bool _mostrarSenha = false;
 
   Future<void> fazerLogin() async {
-    var url = Uri.http("10.112.4.33", "login");
+    var url = Uri.http("10.112.4.33", "/api/login");
     var resposta = await http.post(
       url,
       headers: {
