@@ -3,7 +3,6 @@ import 'package:primeiro_app/Paginas/EsqueceuSenha.dart';
 import 'package:primeiro_app/Paginas/cadastro.dart';
 import 'package:primeiro_app/Paginas/dashboard.dart';
 import 'package:primeiro_app/Utilitarios/tipografia.dart';
-import '../main.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -20,26 +19,31 @@ class _LoginState extends State<Login> {
   bool _mostrarSenha = false;
 
   Future<void> fazerLogin() async {
-    var url = Uri.http("10.112.4.33", "/api/login");
+    var url = Uri.http("10.112.4.154", "/api/login");
     var resposta = await http.post(
       url,
-      headers: {
-        "content-type": "application/json"
-      },
-      body: jsonEncode({'email': emailController.text, 'senha': senhaController.text}),
+      headers: {"content-type": "application/json"},
+      body: jsonEncode({
+        'email': emailController.text,
+        'senha': senhaController.text,
+      }),
     );
+    var dados = jsonDecode(resposta.body);
 
     if (resposta.statusCode != 200) {
-      var dados = jsonDecode(resposta.body);
-
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("${dados["message"]}")),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text("${dados["message"]}")));
       return;
     }
-      Navigator.push(
-          context, MaterialPageRoute(builder: (build) => dashboard()));
-    }
+    String nomeUsuario = dados["nomeUsuario"];
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (builder) => Dashboard(nomeUsuario: nomeUsuario),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {

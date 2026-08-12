@@ -1,38 +1,44 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:primeiro_app/Paginas/login.dart';
-import 'package:primeiro_app/Utilitarios/tipografia.dart';
-import '../main.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
 
-void main() {
-  runApp(MyApp());
+class Dashboard extends StatefulWidget {
+  final String nomeUsuario;
+
+  const Dashboard({
+    super.key,
+    required this.nomeUsuario,
+  });
+
+  @override
+  State<Dashboard> createState() => _DashboardState();
 }
 
-class dashboard extends StatelessWidget {
-  const dashboard({super.key});
+class _DashboardState extends State<Dashboard> {
+  final emailController = TextEditingController();
+  final senhaController = TextEditingController();
+  final nomeController = TextEditingController();
+
+  Future<void> fazerdashboard() async {
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("ChatSenac"),
-        backgroundColor: Colors.white,
+        title: Text("Oi ${widget.nomeUsuario}😊"),
+        backgroundColor: Colors.blue,
       ),
       backgroundColor: Colors.white,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsetsGeometry.symmetric(
+            padding: const EdgeInsets.symmetric(
               horizontal: 24.0,
               vertical: 16.0,
             ),
             child: Column(
               children: [
                 Row(
-                  children: [
-                ]
+                  children: [],
                 ),
               ],
             ),
